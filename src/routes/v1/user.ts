@@ -19,6 +19,7 @@ import {
   paginationSchema,
   userIdSchema,
 } from '@/middlewares/validation-schemas';
+import authorize from '@/middlewares/authorize';
 
 /**
  * Controllers
@@ -33,7 +34,6 @@ import deleteUser from '@/controllers/v1/user/delete-user';
 /**
  * Models
  */
-import authorize from '@/middlewares/authorize';
 
 const router = Router();
 

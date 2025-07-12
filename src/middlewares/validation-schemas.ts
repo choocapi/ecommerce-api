@@ -269,3 +269,90 @@ export const paginationSchema = {
     },
   },
 };
+
+/**
+ * Schema for blog creation
+ * - title: string
+ * - content: string
+ * - status: string (draft, published)
+ */
+export const createBlogSchema = {
+  title: {
+    trim: true,
+    notEmpty: {
+      errorMessage: 'Title is required.',
+    },
+    isLength: {
+      options: {
+        max: 180,
+      },
+      errorMessage: 'Title must be less than 180 characters.',
+    },
+  },
+  content: {
+    trim: true,
+    notEmpty: {
+      errorMessage: 'Content is required.',
+    },
+  },
+  status: {
+    optional: true,
+    isIn: {
+      options: [['draft', 'published']],
+    },
+    errorMessage: 'Status must be either draft or published.',
+  },
+};
+
+/**
+ * Schema for blog slug
+ * - slug: string
+ */
+export const blogSlugSchema = {
+  slug: {
+    notEmpty: {
+      errorMessage: 'Slug is required.',
+    },
+  },
+};
+
+/**
+ * Schema for blog ID
+ * - blogId: string
+ */
+export const blogIdSchema = {
+  blogId: {
+    notEmpty: {
+      errorMessage: 'Blog ID is required.',
+    },
+    isMongoId: {
+      errorMessage: 'Invalid blog ID.',
+    },
+  },
+};
+
+/**
+ * Schema for updating blog
+ * - title: string
+ * - content: string
+ * - status: string (draft, published)
+ */
+export const updateBlogSchema = {
+  title: {
+    optional: true,
+    isLength: {
+      options: {
+        max: 180,
+      },
+      errorMessage: 'Title must be less than 180 characters.',
+    },
+  },
+  content: {},
+  status: {
+    optional: true,
+    isIn: {
+      options: [['draft', 'published']],
+    },
+    errorMessage: 'Status must be either draft or published.',
+  },
+};

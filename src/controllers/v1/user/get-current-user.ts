@@ -27,7 +27,9 @@ const getCurrentUser = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Get current user successfully.',
-      data: user,
+      data: {
+        user,
+      },
     });
   } catch (error) {
     res.status(500).json({

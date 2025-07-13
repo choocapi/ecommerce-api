@@ -217,18 +217,6 @@ export const updateUserSchema = {
 };
 
 /**
- * Schema for user ID
- * - userId: string
- */
-export const userIdSchema = {
-  userId: {
-    errorMessage: 'Invalid user ID.',
-    notEmpty: true,
-    isMongoId: true,
-  },
-};
-
-/**
  * Schema for token in cookies
  * - refreshToken: string
  */
@@ -241,6 +229,23 @@ export const tokenSchema = {
       errorMessage: 'Invalid refresh token.',
     },
   },
+};
+
+/**
+ * Schema for ID
+ * - id: string
+ */
+export const idSchema = (field: string) => {
+  return {
+    [field]: {
+      notEmpty: {
+        errorMessage: `${field} is required.`,
+      },
+      isMongoId: {
+        errorMessage: `Invalid ${field}.`,
+      },
+    },
+  };
 };
 
 /**
@@ -317,21 +322,6 @@ export const blogSlugSchema = {
 };
 
 /**
- * Schema for blog ID
- * - blogId: string
- */
-export const blogIdSchema = {
-  blogId: {
-    notEmpty: {
-      errorMessage: 'Blog ID is required.',
-    },
-    isMongoId: {
-      errorMessage: 'Invalid blog ID.',
-    },
-  },
-};
-
-/**
  * Schema for updating blog
  * - title: string
  * - content: string
@@ -354,5 +344,18 @@ export const updateBlogSchema = {
       options: [['draft', 'published']],
     },
     errorMessage: 'Status must be either draft or published.',
+  },
+};
+
+/**
+ * Schema for comment creation
+ * - content: string
+ */
+export const commentSchema = {
+  content: {
+    trim: true,
+    notEmpty: {
+      errorMessage: 'Content is required.',
+    },
   },
 };

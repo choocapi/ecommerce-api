@@ -20,10 +20,9 @@ import uploadBlogBanner from '@/middlewares/upload-blog-banner';
 import {
   createBlogSchema,
   paginationSchema,
-  userIdSchema,
   blogSlugSchema,
-  blogIdSchema,
   updateBlogSchema,
+  idSchema,
 } from '@/middlewares/validation-schemas';
 import getAllBlogs from '@/controllers/v1/blog/get-all-blogs';
 import getBlogsByUser from '@/controllers/v1/blog/get-blogs-by-user';
@@ -64,7 +63,7 @@ router.get(
   '/user/:userId',
   authenticate,
   authorize(['admin', 'buyer', 'seller']),
-  checkSchema(userIdSchema),
+  checkSchema(idSchema('userId')),
   checkSchema(paginationSchema),
   validationError,
   getBlogsByUser,
@@ -83,7 +82,7 @@ router.put(
   '/:blogId',
   authenticate,
   authorize(['admin']),
-  checkSchema(blogIdSchema),
+  checkSchema(idSchema('blogId')),
   upload.single('banner_image'),
   checkSchema(updateBlogSchema),
   validationError,
@@ -95,7 +94,7 @@ router.delete(
   '/:blogId',
   authenticate,
   authorize(['admin']),
-  checkSchema(blogIdSchema),
+  checkSchema(idSchema('blogId')),
   validationError,
   deleteBlog,
 );

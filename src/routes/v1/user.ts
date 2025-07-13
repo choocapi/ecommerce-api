@@ -17,7 +17,7 @@ import validationError from '@/middlewares/validation-error';
 import {
   updateUserSchema,
   paginationSchema,
-  userIdSchema,
+  idSchema,
 } from '@/middlewares/validation-schemas';
 import authorize from '@/middlewares/authorize';
 
@@ -73,7 +73,7 @@ router.get(
   '/:userId',
   authenticate,
   authorize(['admin']),
-  checkSchema(userIdSchema),
+  checkSchema(idSchema('userId')),
   validationError,
   getUser,
 );
@@ -82,7 +82,7 @@ router.delete(
   '/:userId',
   authenticate,
   authorize(['admin']),
-  checkSchema(userIdSchema),
+  checkSchema(idSchema('userId')),
   validationError,
   deleteUser,
 );

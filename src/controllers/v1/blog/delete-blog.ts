@@ -43,7 +43,7 @@ const deleteBlog = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    if (blog.author !== userId && user?.role !== 'admin') {
+    if (!blog.author.equals(userId) && user?.role !== 'admin') {
       res.status(403).json({
         code: 'AuthorizationError',
         message:

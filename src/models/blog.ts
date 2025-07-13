@@ -87,6 +87,7 @@ const blogSchema = new Schema<IBlog>(
     },
     commentsCount: {
       type: Number,
+      default: 0,
     },
     status: {
       type: String,
